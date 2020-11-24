@@ -1,17 +1,12 @@
+<?php
+    $path = "scriptCredenziali.php";
+    include($path);
+    echo "ciao " . $_COOKIE["user"] . "! </br>";
+    echo "visite: " . $_COOKIE["sessione"] . "</br>";
+?>
+
 <html>
-    <head>
-
-    </head>
-    <body>
-        <form action = "login.php" method = "post">
-            Name: <input type = "text" name = "name" />
-            <br />
-            Surname: <input type = "text" name = "surname" />
-            <br />
-            <input type = "submit"> <!--pulsante di invio-->
-        </form>
-
-        <?php
+    <?php
             $filename = "login.txt";
             $handler = fopen($filename, "r");
 
@@ -27,6 +22,7 @@
 
             if(($nomeLogin == $name) && ($psswLogin == $pssw)){
                 echo "Credenziali corrette, Benvenuto!!";
+                setcookie("user", $_POST["name"], time() + (60 * 60));
             } else {
                 echo "Credenziali errate!";
             }
